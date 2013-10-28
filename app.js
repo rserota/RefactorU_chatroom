@@ -41,6 +41,7 @@ var users = {}
 //If the client just connected
 io.sockets.on('connection', function(socket) {
     users[socket.id] = {name : ''}
+    socket.emit('clientname', socket.id)
     socket.emit('message','Server has connected!')
     io.sockets.emit('userlist',users)
     socket.on('message', function(data){
@@ -49,11 +50,15 @@ io.sockets.on('connection', function(socket) {
     }) 
 
     socket.on('setname', function(data){
-        console.log(data)
-        socket.set('name',data, function(){console.log('socket name: ', socket.name)})
+        console.log('data',data)
+        console.log('')
         users[socket.id]['name'] = data
+        console.log('users: ',users)
+        console.log('username: ', users[socket.id].name)
+        io.sockets.emit('userlist', users)
 
     })
+
     socket.on('connectmessage', function(data){
         console.log(data)
         socket.broadcast.emit('message',data)
