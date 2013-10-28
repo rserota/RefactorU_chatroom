@@ -26,5 +26,11 @@ $(function(){
             $('#message-input').val('')
         }
     })
+
+    $('.name').on('keyup', function(event){
+        if (event.which === 13 && $('.name').val()){
+            socket.emit('setname', $('.name').val())
+        }
+    })
 	// attach events
 });
