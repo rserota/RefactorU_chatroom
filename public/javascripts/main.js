@@ -4,7 +4,7 @@ $(function(){
 	//define socket events
     socket.on('connect',function(data){
         console.log('Connected!')
-        socket.emit('message','A client has connected!')
+        socket.emit('connectmessage','A client has connected!')
     })
     socket.on('message',function(data){
         console.log(data)

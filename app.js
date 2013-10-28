@@ -47,6 +47,10 @@ io.sockets.on('connection', function(socket) {
         console.log(data)
         io.sockets.emit('message',data)
     }) 
+    socket.on('connectmessage', function(data){
+        console.log(data)
+        socket.broadcast.emit('message',data)
+    }) 
     socket.on('disconnect',function(data){
         console.log(data)
         io.sockets.emit('message','Someone Left...')
